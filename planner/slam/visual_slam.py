@@ -78,15 +78,15 @@ class VisualSLAM:
                 class_id = int(box.cls)
                 class_name = result.names[class_id]
                 confidence = float(box.conf[0])
-                if confidence > self.confidence_threshold and class_name in self.allowed_classes:
-                    detected_objects.append(
-                        DetectedObject(
-                            class_id=class_id,
-                            class_name=class_name,
-                            confidence=confidence,
-                            bbox=(x, y, w, h)
-                        )
+                # if confidence > self.confidence_threshold and class_name in self.allowed_classes:
+                detected_objects.append(
+                    DetectedObject(
+                        class_id=class_id,
+                        class_name=class_name,
+                        confidence=confidence,
+                        bbox=(x, y, w, h)
                     )
+                )
         keypoints, descriptors = keypoint_extractor(gray)
         keypoint_info_list = associate_keypoints_with_objects(keypoints, detected_objects)
         vis_frame = frame.copy()

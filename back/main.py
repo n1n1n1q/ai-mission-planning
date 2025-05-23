@@ -86,12 +86,13 @@ def insert_video(video_name, file_path, timestamps_json, metadata=None):
     Returns:
         ObjectId: The inserted document ID
     """
+    created_at = metadata["streams"][1]["tags"]["creation_time"]
     video_document = {
         "video_name": video_name,
         "file_path": file_path,
         "timestamps": timestamps_json,
         "metadata": metadata or {},
-        "created_at": datetime.now()
+        "created_at": created_at if metadata else datetime.now()
     }
     
     result = videos_collection.insert_one(video_document)
@@ -99,7 +100,7 @@ def insert_video(video_name, file_path, timestamps_json, metadata=None):
 
 @app.get("/api/videos/")
 async def get_videos():
-    videos = list(videos_collection.find({}, {"_id": 1, "video_name": 1, "file_path": 1, "timestamps": 1, "metadata": 1, "created_at": 1}))
+    videos = list(videos_collection.find({}))
     
     for video in videos:
         video["_id"] = str(video["_id"])

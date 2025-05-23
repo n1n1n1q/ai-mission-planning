@@ -141,7 +141,7 @@ class VisualSLAM:
         """
         Determine if current frame should be a keyframe.
         """
-        return len(self.keyframes) == 0 or len(matches) > 0.75 * 
+        return len(self.keyframes) == 0 or len(matches) > 0.75 * \
             len(self.prev_kps) or len(self.keyframes) % 5 == 0
     
     def _add_keyframe(self, frame, keypoints, descriptors, objects):

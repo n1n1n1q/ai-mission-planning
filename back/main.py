@@ -6,6 +6,8 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import os
 import shutil
+import subprocess
+import json
 from datetime import datetime
 from pathlib import Path
 import uuid
@@ -50,28 +52,46 @@ async def create_video(
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(video_file.file, buffer)
     
+    print(f"Extracting metadata from {file_path}")
+    metadata = extract_video_metadata(str(file_path))
+    
     timestamps = []
     result = insert_video(
         video_name=video_name,
         file_path=str(file_path),
-        timestamps_json=timestamps
+        timestamps_json=timestamps,
+        metadata=metadata
     )
     
     return {
         "id": str(result),
         "video_name": video_name,
         "file_path": str(file_path),
-        "file_url": f"/videos/{safe_filename}",
+        "file_url": f"/static/videos/{safe_filename}",
+        "metadata": metadata,
         "message": "Video successfully uploaded and added to database"
     }
-    return {"hello": 1}
     
 
-def insert_video(video_name, file_path, timestamps_json):
+def insert_video(video_name, file_path, timestamps_json, metadata=None):
+    """
+    Insert a video document into the database
+    
+    Args:
+        video_name (str): Name of the video
+        file_path (str): Path to the video file
+        timestamps_json (list): List of timestamp objects
+        metadata (dict, optional): Video metadata extracted by ffprobe
+        
+    Returns:
+        ObjectId: The inserted document ID
+    """
     video_document = {
         "video_name": video_name,
         "file_path": file_path,
-        "timestamps": timestamps_json
+        "timestamps": timestamps_json,
+        "metadata": metadata or {},
+        "created_at": datetime.now()
     }
     
     result = videos_collection.insert_one(video_document)
@@ -79,13 +99,16 @@ def insert_video(video_name, file_path, timestamps_json):
 
 @app.get("/api/videos/")
 async def get_videos():
-    videos = list(videos_collection.find({}, {"_id": 1, "video_name": 1, "file_path": 1, "timestamps": 1}))
+    videos = list(videos_collection.find({}, {"_id": 1, "video_name": 1, "file_path": 1, "timestamps": 1, "metadata": 1, "created_at": 1}))
     
     for video in videos:
         video["_id"] = str(video["_id"])
         
         filename = os.path.basename(video["file_path"])
         video["url"] = f"/static/videos/{filename}"
+        
+        if "created_at" in video and isinstance(video["created_at"], datetime):
+            video["created_at"] = video["created_at"].isoformat()
     
     return videos
 
@@ -103,8 +126,23 @@ async def get_video(video_id: str):
     
     video["_id"] = str(video["_id"])
     
+    if "created_at" in video and isinstance(video["created_at"], datetime):
+        video["created_at"] = video["created_at"].isoformat()
+    
     filename = os.path.basename(video["file_path"])
     video["url"] = f"/static/videos/{filename}"
+    
+    if "metadata" not in video or not video["metadata"]:
+        if os.path.exists(video["file_path"]):
+            print(f"Extracting missing metadata for video {video_id}")
+            metadata = extract_video_metadata(video["file_path"])
+            video["metadata"] = metadata
+            videos_collection.update_one(
+                {"_id": ObjectId(video_id)},
+                {"$set": {"metadata": metadata}}
+            )
+        else:
+            video["metadata"] = {"error": "File not found"}
     
     return video
 
@@ -163,4 +201,58 @@ async def compare_videos(video_id1: str, video_id2: str):
         "video2": video2,
         "message": "Random timestamps generated and saved to database"
     }
+
+@app.post("/api/videos/{video_id}/extract-metadata")
+async def extract_video_metadata_endpoint(video_id: str):
+    """
+    Extract or update metadata for an existing video
+    """
+    from bson.objectid import ObjectId
+    
+    video = videos_collection.find_one({"_id": ObjectId(video_id)})
+    
+    if not video:
+        return {"error": "Video not found"}, 404
+    
+    if not os.path.exists(video["file_path"]):
+        return {"error": f"Video file not found at {video['file_path']}"}, 404
+    
+    metadata = extract_video_metadata(video["file_path"])
+    
+    videos_collection.update_one(
+        {"_id": ObjectId(video_id)},
+        {"$set": {"metadata": metadata}}
+    )
+    
+    return {
+        "id": str(video["_id"]),
+        "video_name": video["video_name"],
+        "metadata": metadata,
+        "message": "Metadata successfully extracted and updated"
+    }
+
+def extract_video_metadata(file_path):
+    try:
+        cmd = [
+            "ffprobe", 
+            "-v", "quiet", 
+            "-print_format", "json", 
+            "-show_format", 
+            "-show_streams", 
+            file_path
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        
+        if result.returncode != 0:
+            print(f"Error running ffprobe: {result.stderr}")
+            return {"error": "Failed to extract metadata"}
+            
+        metadata = json.loads(result.stdout)
+        
+        return metadata
+        
+    except Exception as e:
+        print(f"Error extracting metadata: {e}")
+        return {"error": str(e)}
 

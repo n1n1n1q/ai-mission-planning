@@ -7,12 +7,14 @@ from dataclasses import dataclass
 from typing import List, Tuple, Dict, Any, Optional
 
 # =========================================
-# INTRINSIC CAMERA PARAMETERS
+# INTRINSIC CAMERA PARAMETERS - placeholder values for iPhone 14
 # =========================================
-CAM_FX = 800.0
-CAM_FY = 800.0
-CAM_CX = 640.0
-CAM_CY = 360.0
+
+
+CAM_FX = 3350
+CAM_FY = 3350
+CAM_CX = 2016
+CAM_CY = 1512
 
 K = np.array([[CAM_FX,     0.0, CAM_CX],
               [0.0,     CAM_FY, CAM_CY],

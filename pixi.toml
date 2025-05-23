@@ -1,0 +1,13 @@
+[workspace]
+authors = ["Oleh Basystyi <basystyo@gmail.com>"]
+channels = ["conda-forge"]
+name = "ai-mission-planning"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+numpy = ">=2.2.6,<3"
+opencv = ">=4.11.0,<5"
+ultralytics = ">=8.3.143,<9"

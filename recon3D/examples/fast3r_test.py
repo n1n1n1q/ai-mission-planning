@@ -19,6 +19,7 @@ if __name__ == "__main__":
     print(output_dict["preds"][0].keys())
     save_output_dict(output_dict, "saved_reconstruction.pkl")
     logging.info("Inference completed")
-    pcd = merge_clouds(output_dict)
+    estimate_global_poses(output_dict, confidence=20)
+    pcd = merge_clouds(output_dict, confidence=20)
     visualize_pcds(pcd.pcd)
 

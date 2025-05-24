@@ -87,7 +87,6 @@ def merge_clouds(output_dict, confidence=65):
     """
     Merge point clouds into a single point cloud.
     """
-    estimate_global_poses(output_dict, confidence=confidence)
     top_points, top_colors = [], []
     keep_frac = 1.0 - confidence / 100.0
     for pred, view in zip(output_dict["preds"], output_dict["views"]):

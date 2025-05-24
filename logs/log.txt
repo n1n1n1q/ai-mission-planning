@@ -1,0 +1,79 @@
+Output dictionary loaded from data/saved_reconstruction_day1.pkl
+Output dictionary loaded from data/saved_reconstruction_day2.pkl
+YOLOv8n summary (fused): 72 layers, 3,151,904 parameters, 0 gradients, 8.7 GFLOPs
+
+0: 288x512 1 bottle, 1 bowl, 6 chairs, 1 dining table, 25.9ms
+Speed: 0.0ms preprocess, 25.9ms inference, 1.0ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 5 chairs, 1 dining table, 23.4ms
+Speed: 0.0ms preprocess, 23.4ms inference, 1.9ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 4 chairs, 1 dining table, 21.7ms
+Speed: 0.0ms preprocess, 21.7ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 22.5ms
+Speed: 0.0ms preprocess, 22.5ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 26.5ms
+Speed: 0.0ms preprocess, 26.5ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 19.1ms
+Speed: 0.0ms preprocess, 19.1ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 18.6ms
+Speed: 0.0ms preprocess, 18.6ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 dining table, 19.1ms
+Speed: 0.0ms preprocess, 19.1ms inference, 0.6ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 18.7ms
+Speed: 0.0ms preprocess, 18.7ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 21.4ms
+Speed: 0.0ms preprocess, 21.4ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 4 chairs, 1 dining table, 17.5ms
+Speed: 0.0ms preprocess, 17.5ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 17.9ms
+Speed: 0.0ms preprocess, 17.9ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 21.3ms
+Speed: 0.0ms preprocess, 21.3ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 3 chairs, 1 dining table, 20.4ms
+Speed: 0.0ms preprocess, 20.4ms inference, 1.3ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 20.2ms
+Speed: 0.0ms preprocess, 20.2ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 18.6ms
+Speed: 0.0ms preprocess, 18.6ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 17.1ms
+Speed: 0.0ms preprocess, 17.1ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 17.0ms
+Speed: 0.0ms preprocess, 17.0ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 18.5ms
+Speed: 0.0ms preprocess, 18.5ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 19.6ms
+Speed: 0.0ms preprocess, 19.6ms inference, 0.9ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 21.1ms
+Speed: 0.0ms preprocess, 21.1ms inference, 0.6ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 22.3ms
+Speed: 0.0ms preprocess, 22.3ms inference, 0.6ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 20.2ms
+Speed: 0.0ms preprocess, 20.2ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 3 chairs, 1 dining table, 20.2ms
+Speed: 0.0ms preprocess, 20.2ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+defaultdict(<class 'list'>, {'chair1': [0, 1], 'chair2': [0, 1, 2, 3, 10, 11], 'chair3': [0, 1, 2, 3, 4, 5, 6], 'chair4': [0, 10, 11], 'bottle5': [0], 'chair6': [0, 1, 2], 'dining table7': [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11], 'bowl8': [0], 'chair9': [0, 1, 2], 'chair29': [8, 9, 10], 'chair37': [10]})
+{'chair1': PointCloud with 62178 points., 'chair2': PointCloud with 152311 points., 'chair3': PointCloud with 124285 points., 'chair4': PointCloud with 70700 points., 'bottle5': PointCloud with 532 points., 'chair6': PointCloud with 128637 points., 'dining table7': PointCloud with 955807 points., 'bowl8': PointCloud with 722 points., 'chair9': PointCloud with 17956 points., 'chair29': PointCloud with 81933 points., 'chair37': PointCloud with 2244 points.}
+dict_keys(['chair1', 'chair2', 'chair3', 'chair4', 'bottle5', 'chair6', 'dining table7', 'bowl8', 'chair9', 'chair29', 'chair37'])
+dict_keys(['chair2', 'chair1', 'chair58', 'dining table7', 'chair77', 'chair37', 'chair99'])

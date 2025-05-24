@@ -9,12 +9,15 @@ class Detector:
     """
     Yolo wrapper
     """
-    def __init__(self, model_path = "", classes = None, conf = 0.25, iou = 0.45):
+    def __init__(self, model_path = "", segmentation = False, classes = None, conf = 0.25, iou = 0.45):
         """
         Initialize the Yolo model
         """
-        self._load_model(model_path)
-        self.tracker = "bytetrack.yaml"  # default track
+        if segmentation:
+            self._load_segmentation_model(model_path)
+        else:
+            self._load_model(model_path)
+        self.tracker = "bytetrack.yaml"
         self.model.conf = conf
         self.model.iou = iou
         self.model.classes = classes
@@ -58,9 +61,43 @@ class Detector:
                         tracked_detections.append((track_id, x1, y1, x2, y2, conf, detected_class, class_name))
         
         if save:
-            self.model.save()
+            self.save()
         
         return tracked_detections
+
+    def process_frame_with_tracking_and_segmentation(self, image, tracker="bytetrack.yaml", save=False):
+        """
+        Process the image with tracking and segmentation, returning the detections
+        """
+        results = self.model.track(image, persist=True, tracker=tracker)
+        tracked_detections = []
+        
+        for res in results:
+            if res.boxes.id is not None:
+                for i, box in enumerate(res.boxes):
+                    x1, y1, x2, y2 = box.xyxy[0]
+                    conf = box.conf[0]
+                    detected_class = int(box.cls[0])
+                    class_name = res.names[detected_class]
+                    track_id = int(box.id[0])
+                    
+                    mask = None
+                    if hasattr(res, 'masks') and res.masks is not None:
+                        mask = res.masks[i].data[0].cpu().numpy()
+                    
+                    if self.model.classes is None or class_name in self.model.classes:
+                        tracked_detections.append((track_id, x1, y1, x2, y2, conf, detected_class, class_name, mask))
+        
+        if save:
+            self.save()
+        
+        return tracked_detections
+
+    def save(self):
+        """
+        Save the model
+        """
+        self.model.save()
 
     def draw_detections(self, image, detections):
         """
@@ -79,6 +116,16 @@ class Detector:
             self.model = YOLO(model_path)
         else:
             self.model = YOLO("yolov8n.pt")
+        self.model.fuse()
+    
+    def _load_segmentation_model(self, model_path):
+        """
+        Load a segmentation model
+        """
+        if model_path:
+            self.model = YOLO(model_path)
+        else:
+            self.model = YOLO("yolov8n-seg.pt")
         self.model.fuse()
         
     def process_video(self, video_path, output_path=None, show=False, tracker="bytetrack.yaml"):

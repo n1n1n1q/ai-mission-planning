@@ -4,6 +4,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {backendUrl} from "@/const";
 
 export default function UploadPage() {
     const [videoUrl, setVideoUrl] = useState<string | null>(null)
@@ -30,15 +31,15 @@ export default function UploadPage() {
         if (!file) return
 
         const formData = new FormData()
-        formData.append("video", file)
+        formData.append("video_file", file)
 
-        const res = await fetch("/api/upload", {
+        const res = await fetch(`${backendUrl}/api/videos/?video_name=${file.name}`, {
             method: "POST",
             body: formData,
         })
 
         const data = await res.json()
-        alert("Uploaded: " + data.url)
+
     }
 
     return (
@@ -59,8 +60,8 @@ export default function UploadPage() {
 
                 </div>
             )}            {videoUrl && (
-                <video controls width={720} src={videoUrl}   onLoadedMetadata={handleMetadata} />
-            )}
+            <video controls width={720} src={videoUrl}   onLoadedMetadata={handleMetadata} />
+        )}
         </div>
     )
 }

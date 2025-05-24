@@ -87,11 +87,10 @@ def merge_clouds(output_dict, confidence=65):
     """
     Merge point clouds into a single point cloud.
     """
-    estimate_global_poses(output_dict, confidence=confidence)
     top_points, top_colors = [], []
     keep_frac = 1.0 - confidence / 100.0
     for pred, view in zip(output_dict["preds"], output_dict["views"]):
-        pts = to_numpy(pred["pts3d_in_other_view"].cpu()).reshape(-1, 3)
+        pts = to_numpy(pred["pts3d_local_aligned_to_global"].cpu()).reshape(-1, 3)
         conf = to_numpy(pred["conf"].cpu()).flatten()
 
         k = max(1, int(len(conf) * keep_frac))

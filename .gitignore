@@ -192,3 +192,5 @@ assets/
 
 *.pyc*
 *__pycache__*
+
+yolov8n.pt

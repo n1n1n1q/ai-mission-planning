@@ -6,18 +6,19 @@ import os
 import torch
 import open3d as o3d
 import numpy as np
-from fast3r.dust3r.utils.image import load_images
-from fast3r.dust3r.inference_multiview import inference as fast3r_inference
-from fast3r.models.fast3r import Fast3R
-from fast3r.models.multiview_dust3r_module import MultiViewDUSt3RLitModule
+
+# from fast3r.dust3r.utils.image import load_images
+# from fast3r.dust3r.inference_multiview import inference as fast3r_inference
+# from fast3r.models.fast3r import Fast3R
+# from fast3r.models.multiview_dust3r_module import MultiViewDUSt3RLitModule
 from recon3D.data.cloud import CloudWithViews
 
-model = Fast3R.from_pretrained("model")
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = model.to(device)
-lit_module = MultiViewDUSt3RLitModule.load_for_inference(model)
-model.eval()
-lit_module.eval()
+# model = Fast3R.from_pretrained("model")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# model = model.to(device)
+# lit_module = MultiViewDUSt3RLitModule.load_for_inference(model)
+# model.eval()
+# lit_module.eval()
 
 
 def load_data(filepath):
@@ -73,6 +74,7 @@ def extract_poses(output_dict):
     camera_poses = poses_c2w_batch[0]
     return camera_poses
 
+
 def estimate_global_poses(output_dict, confidence=65):
     """
     Estimate global point cloud positions.
@@ -82,6 +84,7 @@ def estimate_global_poses(output_dict, confidence=65):
         views=output_dict["views"],
         min_conf_thr_percentile=confidence,
     )
+
 
 def merge_clouds(output_dict, confidence=65):
     """
@@ -110,7 +113,7 @@ def merge_clouds(output_dict, confidence=65):
     pcd.points = o3d.utility.Vector3dVector(points)
     pcd.colors = o3d.utility.Vector3dVector(colors)
 
-    return CloudWithViews(pcd=pcd, poses=extract_poses(output_dict), views=output_dict["views"])
+    return CloudWithViews(pcd=pcd, poses=None, views=output_dict["views"])
 
 
 def to_numpy(torch_tensor):

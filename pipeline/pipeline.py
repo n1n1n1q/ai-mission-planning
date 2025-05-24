@@ -27,6 +27,7 @@ def video_to_point_cloud(video_path):
     return pcd, time_intervals, num_of_frames
 
 
+
 if __name__ == "__main__":
     video_file = "assets/hackaton videos /IMG_2265.MOV"
     reconstruction_file_path = "data/saved_reconstruction.pkl"

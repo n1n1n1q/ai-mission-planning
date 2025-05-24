@@ -189,3 +189,6 @@ recon3D/data/photos/*
 recon3D/data/photos/
 recon3D/data/photos
 assets/
+
+*.pyc*
+*__pycache__*

@@ -10,6 +10,8 @@ class CloudWithViews:
     pcd: geometry.PointCloud
     views: list
     poses: list
+    interesting_clouds: dict = None
+    obj_frames: dict = None
     def __matmul__(self, B):
         """
         Multiply PCD's by a 4x4 matrix

@@ -13,16 +13,13 @@ from datetime import datetime
 from pathlib import Path
 import uuid
 import random
-origins = [
-    "http://localhost:3000",  # Next.js dev server
-    "http://127.0.0.1:3000"
-]
+
+origins = ["http://localhost:3000", "http://127.0.0.1:3000"]  # Next.js dev server
 UPLOAD_DIR = Path("./back/uploads")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 with open("back/.env_info", "r", encoding="utf-8") as f:
     uri = f.read().strip()
-
 
 
 client = MongoClient(uri, server_api=ServerApi("1"))
@@ -54,14 +51,13 @@ class VideoCreate(BaseModel):
 
 
 @app.post("/api/videos/", status_code=201)
-async def create_video(
-    video_name: str,
-    video_file: UploadFile
-):
+async def create_video(video_name: str, video_file: UploadFile):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     unique_id = str(uuid.uuid4())[:8]
     file_extension = os.path.splitext(video_file.filename)[1]
-    safe_filename = f"{video_name.replace(' ', '_')}_{timestamp}_{unique_id}{file_extension}"
+    safe_filename = (
+        f"{video_name.replace(' ', '_')}_{timestamp}_{unique_id}{file_extension}"
+    )
 
     file_path = UPLOAD_DIR / safe_filename
     with open(file_path, "wb") as buffer:
@@ -89,18 +85,6 @@ async def create_video(
 
 
 def insert_video(video_name, file_path, timestamps_json, metadata=None):
-    """
-    Insert a video document into the database
-
-    Args:
-        video_name (str): Name of the video
-        file_path (str): Path to the video file
-        timestamps_json (list): List of timestamp objects
-        metadata (dict, optional): Video metadata extracted by ffprobe
-
-    Returns:
-        ObjectId: The inserted document ID
-    """
     created_at = metadata.get("format", {}).get("tags", {}).get("creation_time", None)
     video_document = {
         "video_name": video_name,
@@ -132,9 +116,6 @@ async def get_videos():
 
 @app.get("/api/videos/{video_id}")
 async def get_video(video_id: str):
-    """
-    Get details about a specific video by ID
-    """
     from bson.objectid import ObjectId
 
     video = videos_collection.find_one({"_id": ObjectId(video_id)})

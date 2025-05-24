@@ -3,6 +3,8 @@ Reconstruction with Fast3R
 """
 import os
 import torch
+import open3d as o3d
+import numpy as np
 from fast3r.dust3r.utils.image import load_images
 from fast3r.dust3r.inference_multiview import inference as fast3r_inference
 from fast3r.models.fast3r import Fast3R
@@ -62,3 +64,45 @@ def extract_poses(output_dict):
     )
     camera_poses = poses_c2w_batch[0]
     return camera_poses
+
+def merge_clouds(output_dict, confidence=65):
+    """
+    Merge point clouds into a single point cloud.
+    """
+    lit_module.align_local_pts3d_to_global(
+        preds=output_dict["preds"],
+        views=output_dict["views"],
+        min_conf_thr_percentile=confidence,
+    )
+
+    top_points, top_colors = [], []
+    keep_frac = 1.0 - confidence / 100.0
+    for pred, view in zip(output_dict["preds"], output_dict["views"]):
+        pts  = to_numpy(pred["pts3d_in_other_view"].cpu()).reshape(-1, 3)
+        conf = to_numpy(pred["conf"].cpu()).flatten()
+
+        k = max(1, int(len(conf) * keep_frac))
+        idx = np.argpartition(-conf, k - 1)[:k]
+        pts, conf = pts[idx], conf[idx]
+
+        clr = to_numpy(view['img'].cpu().squeeze().permute(1,2,0)).reshape(-1, 3)[idx]
+        clr = ((clr + 1.0) * 127.5).astype(np.uint8) / 255.0  # → [0,1]
+
+        top_points.append(pts)
+        top_colors.append(clr)
+
+    points = np.concatenate(top_points, axis=0)
+    colors = np.concatenate(top_colors, axis=0)
+
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(points)
+    pcd.colors = o3d.utility.Vector3dVector(colors)
+
+
+    return pcd
+
+def to_numpy(torch_tensor):
+    """
+    Convert a PyTorch tensor to a NumPy array.
+    """
+    return torch_tensor.cpu().numpy() if torch_tensor.is_cuda else torch_tensor.numpy()

@@ -2,3 +2,8 @@
 # pixi environments
 .pixi
 *.egg-info
+
+back/.env_info
+back/uploads/
+.env/
+assets/

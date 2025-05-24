@@ -8,8 +8,6 @@ from recon3D.data.utils import *
 logging.basicConfig(level=logging.INFO)
 
 if __name__ == "__main__":
-    # Load data
-
     filepath = "data"
     images = load_data(filepath)
     logging.info(f"Loaded {len(images)} images from {filepath}")

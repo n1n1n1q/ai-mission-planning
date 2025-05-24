@@ -4,6 +4,7 @@ IO utilities for saving and loading reconstruction data
 import os
 import pickle
 import torch
+import numpy as np
 
 def save_output_dict(output_dict, filepath):
     """
@@ -73,3 +74,57 @@ def load_output_dict(filepath, device=None):
     
     print(f"Output dictionary loaded from {filepath}")
     return output_dict
+
+def save_poses(poses, filepath):
+    """
+    Save poses data to a file.
+    
+    Args:
+        poses (list): List of pose dictionaries, each containing pose data.
+        filepath (str): Path where to save the poses data.
+    """
+    processed_poses = []
+    
+    for pose in poses:
+        pose_cpu = {}
+        for k, v in enumerate(pose):
+            if isinstance(v, torch.Tensor):
+                pose_cpu[k] = v.cpu()
+            else:
+                pose_cpu[k] = v
+        processed_poses.append(pose_cpu)
+    
+    with open(filepath, 'wb') as f:
+        pickle.dump(processed_poses, f)
+    
+    print(f"Poses saved to {filepath}")
+
+def load_poses(filepath, device=None):
+    """
+    Load poses data from a file.
+    
+    Args:
+        filepath (str): Path to the saved poses file.
+        device (torch.device, optional): Device to load tensors to. If None, 
+                                        tensors remain on CPU.
+    
+    Returns:
+        list: The loaded poses list.
+    """
+    if not os.path.exists(filepath):
+        raise FileNotFoundError(f"File not found: {filepath}")
+    
+    with open(filepath, 'rb') as f:
+        poses = pickle.load(f)
+    new_poses = []
+    for pose in poses:
+        tmp = []
+        for _, v in pose.items():
+            if isinstance(v, torch.Tensor):
+                tmp.append(v.cpu())
+            else:
+                tmp.append(v)
+        new_poses.append(np.array(tmp))
+
+    print(f"Poses loaded from {filepath}")
+    return np.array(new_poses)

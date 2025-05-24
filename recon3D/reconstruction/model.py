@@ -1,6 +1,7 @@
 """
 Reconstruction with Fast3R
 """
+
 import os
 import torch
 import open3d as o3d
@@ -10,14 +11,14 @@ from fast3r.dust3r.inference_multiview import inference as fast3r_inference
 from fast3r.models.fast3r import Fast3R
 from fast3r.models.multiview_dust3r_module import MultiViewDUSt3RLitModule
 
-# --- Setup ---
 
-model = Fast3R.from_pretrained("model")  # If you have networking issues, try pre-download the HF checkpoint dir and change the path here to a local directory
+model = Fast3R.from_pretrained("model")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
 lit_module = MultiViewDUSt3RLitModule.load_for_inference(model)
 model.eval()
 lit_module.eval()
+
 
 def load_data(filepath):
     """
@@ -25,9 +26,14 @@ def load_data(filepath):
     This function should be implemented to load your specific data format.
     """
     filelist = os.listdir(filepath)
-    filelist = [os.path.join(filepath, f) for f in filelist if f.endswith('.jpg') or f.endswith('.png')]
+    filelist = [
+        os.path.join(filepath, f)
+        for f in filelist
+        if f.endswith(".jpg") or f.endswith(".png")
+    ]
     images = load_images(filelist, size=512, verbose=True)
     return images
+
 
 def inference(images):
     """
@@ -43,27 +49,30 @@ def inference(images):
     )
     return output_dict
 
+
 def extract_point_clouds(output_dict):
     """
     Extract point clouds from the output dictionary.
     """
     point_clouds = []
-    for pred in output_dict['preds']:
-        point_cloud = pred['pts3d_in_other_view'].cpu().numpy()
+    for pred in output_dict["preds"]:
+        point_cloud = pred["pts3d_in_other_view"].cpu().numpy()
         point_clouds.append(point_cloud)
     return point_clouds
+
 
 def extract_poses(output_dict):
     """
     Extract camera positions from the output dictionary.
     """
     poses_c2w_batch, estimated_focals = MultiViewDUSt3RLitModule.estimate_camera_poses(
-        output_dict['preds'],
+        output_dict["preds"],
         niter_PnP=100,
-        focal_length_estimation_method='first_view_from_global_head'
+        focal_length_estimation_method="first_view_from_global_head",
     )
     camera_poses = poses_c2w_batch[0]
     return camera_poses
+
 
 def merge_clouds(output_dict, confidence=65):
     """
@@ -78,14 +87,14 @@ def merge_clouds(output_dict, confidence=65):
     top_points, top_colors = [], []
     keep_frac = 1.0 - confidence / 100.0
     for pred, view in zip(output_dict["preds"], output_dict["views"]):
-        pts  = to_numpy(pred["pts3d_in_other_view"].cpu()).reshape(-1, 3)
+        pts = to_numpy(pred["pts3d_in_other_view"].cpu()).reshape(-1, 3)
         conf = to_numpy(pred["conf"].cpu()).flatten()
 
         k = max(1, int(len(conf) * keep_frac))
         idx = np.argpartition(-conf, k - 1)[:k]
         pts, conf = pts[idx], conf[idx]
 
-        clr = to_numpy(view['img'].cpu().squeeze().permute(1,2,0)).reshape(-1, 3)[idx]
+        clr = to_numpy(view["img"].cpu().squeeze().permute(1, 2, 0)).reshape(-1, 3)[idx]
         clr = ((clr + 1.0) * 127.5).astype(np.uint8) / 255.0  # → [0,1]
 
         top_points.append(pts)
@@ -98,8 +107,8 @@ def merge_clouds(output_dict, confidence=65):
     pcd.points = o3d.utility.Vector3dVector(points)
     pcd.colors = o3d.utility.Vector3dVector(colors)
 
-
     return pcd
+
 
 def to_numpy(torch_tensor):
     """

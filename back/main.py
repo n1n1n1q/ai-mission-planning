@@ -87,12 +87,13 @@ def insert_video(video_name, file_path, timestamps_json, metadata=None):
         ObjectId: The inserted document ID
     """
     created_at = metadata["streams"][1]["tags"]["creation_time"]
+    print(metadata["format"]["tags"]["creation_time"])
     video_document = {
         "video_name": video_name,
         "file_path": file_path,
         "timestamps": timestamps_json,
         "metadata": metadata or {},
-        "created_at": created_at if metadata else datetime.now()
+        "created_at": created_at if metadata else ""
     }
     
     result = videos_collection.insert_one(video_document)

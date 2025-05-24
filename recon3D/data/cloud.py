@@ -10,6 +10,9 @@ class CloudWithViews:
     pcd: geometry.PointCloud
     views: list
     poses: list
+    confidence_masks: list
+    interest_clouds: list[geometry.PointCloud] = None
+    interest_points: geometry.PointCloud = None
     def __matmul__(self, B):
         """
         Multiply PCD's by a 4x4 matrix

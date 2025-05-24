@@ -82,6 +82,7 @@ def merge_clouds(output_dict, confidence=65):
     estimate_global_poses(output_dict, confidence=confidence)
     top_points, top_colors = [], []
     keep_frac = 1.0 - confidence / 100.0
+    confidence_masks = []
     for pred, view in zip(output_dict["preds"], output_dict["views"]):
         pts  = to_numpy(pred["pts3d_in_other_view"].cpu()).reshape(-1, 3)
         conf = to_numpy(pred["conf"].cpu()).flatten()
@@ -95,6 +96,7 @@ def merge_clouds(output_dict, confidence=65):
 
         top_points.append(pts)
         top_colors.append(clr)
+        confidence_masks.append(idx)
 
     points = np.concatenate(top_points, axis=0)
     colors = np.concatenate(top_colors, axis=0)
@@ -103,7 +105,8 @@ def merge_clouds(output_dict, confidence=65):
     pcd.points = o3d.utility.Vector3dVector(points)
     pcd.colors = o3d.utility.Vector3dVector(colors)
 
-    return CloudWithViews(pcd=pcd, poses=extract_poses(output_dict), views=output_dict["views"])
+    return CloudWithViews(pcd=pcd, poses=extract_poses(output_dict), views=output_dict["views"]
+                          , confidence_masks=confidence_masks)
 
 def to_numpy(torch_tensor):
     """

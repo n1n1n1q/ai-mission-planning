@@ -185,7 +185,10 @@ back/uploads/
 
 data/photo_*
 data/photos/
-recond3D/data/*
-recond3D/data/photos/*
-recond3D/data/photos/
+recon3D/data/photos/*
+recon3D/data/photos/
+recon3D/data/photos
 assets/
+
+*.pyc*
+*__pycache__*

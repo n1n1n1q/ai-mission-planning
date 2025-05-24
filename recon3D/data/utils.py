@@ -19,7 +19,6 @@ def to_pointcloud(points, colors=None):
     
     pcd = o3d.geometry.PointCloud()
     pts = o3d.utility.Vector3dVector(points.reshape(-1, 3))
-    # print(pts.shape)
     pcd.points = pts
 
     if colors is not None:

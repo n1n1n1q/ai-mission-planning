@@ -3,6 +3,7 @@ from pymongo.server_api import ServerApi
 from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
 import shutil
@@ -12,13 +13,16 @@ from datetime import datetime
 from pathlib import Path
 import uuid
 import random
-
+origins = [
+    "http://localhost:3000",  # Next.js dev server
+    "http://127.0.0.1:3000"
+]
 UPLOAD_DIR = Path("./back/uploads")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 with open("back/.env_info", "r", encoding="utf-8") as f:
     uri = f.read().strip()
-    
+
 
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client["etdh"]
@@ -26,6 +30,13 @@ videos_collection = db["videos"]
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.mount("/static/videos", StaticFiles(directory=UPLOAD_DIR), name="videos")
 
 class TimestampsModel(BaseModel):
@@ -41,20 +52,20 @@ class VideoCreate(BaseModel):
 @app.post("/api/videos/", status_code=201)
 async def create_video(
     video_name: str,
-    video_file: UploadFile 
+    video_file: UploadFile
 ):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     unique_id = str(uuid.uuid4())[:8]
     file_extension = os.path.splitext(video_file.filename)[1]
     safe_filename = f"{video_name.replace(' ', '_')}_{timestamp}_{unique_id}{file_extension}"
-    
+
     file_path = UPLOAD_DIR / safe_filename
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(video_file.file, buffer)
-    
+
     print(f"Extracting metadata from {file_path}")
     metadata = extract_video_metadata(str(file_path))
-    
+
     timestamps = []
     result = insert_video(
         video_name=video_name,
@@ -62,7 +73,7 @@ async def create_video(
         timestamps_json=timestamps,
         metadata=metadata
     )
-    
+
     return {
         "id": str(result),
         "video_name": video_name,
@@ -71,23 +82,22 @@ async def create_video(
         "metadata": metadata,
         "message": "Video successfully uploaded and added to database"
     }
-    
+
 
 def insert_video(video_name, file_path, timestamps_json, metadata=None):
     """
     Insert a video document into the database
-    
+
     Args:
         video_name (str): Name of the video
         file_path (str): Path to the video file
         timestamps_json (list): List of timestamp objects
         metadata (dict, optional): Video metadata extracted by ffprobe
-        
+
     Returns:
         ObjectId: The inserted document ID
     """
-    created_at = metadata["streams"][1]["tags"]["creation_time"]
-    print(metadata["format"]["tags"]["creation_time"])
+    created_at = metadata.get("format", {}).get("tags", {}).get("creation_time", None)
     video_document = {
         "video_name": video_name,
         "file_path": file_path,

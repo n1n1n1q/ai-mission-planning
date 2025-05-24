@@ -1,0 +1,8 @@
+fastapi[standard]
+pymongo[srv]
+python-multipart
+
+torch 
+torchvision 
+torchaudio 
+opencv-python

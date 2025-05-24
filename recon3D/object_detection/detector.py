@@ -14,11 +14,12 @@ class Detector:
         Initialize the Yolo model
         """
         self._load_model(model_path)
+        self.tracker = "bytetrack.yaml"  # default track
         self.model.conf = conf
         self.model.iou = iou
         self.model.classes = classes
 
-    def process_image(self, image, save=False):
+    def process_frame(self, image, save=False):
         """
         Process the image and return the detections
         """
@@ -36,6 +37,30 @@ class Detector:
         if save:
             self.model.save()
         return detections
+
+    def process_frame_with_tracking(self, image, tracker="bytetrack.yaml", save=False):
+        """
+        Process the image with tracking and return the detections
+        """
+        results = self.model.track(image, persist=True, tracker=tracker)
+        tracked_detections = []
+        
+        for res in results:
+            if res.boxes.id is not None:
+                for i, box in enumerate(res.boxes):
+                    x1, y1, x2, y2 = box.xyxy[0]
+                    conf = box.conf[0]
+                    detected_class = int(box.cls[0])
+                    class_name = res.names[detected_class]
+                    track_id = int(box.id[0])
+                    
+                    if self.model.classes is None or class_name in self.model.classes:
+                        tracked_detections.append((track_id, x1, y1, x2, y2, conf, detected_class, class_name))
+        
+        if save:
+            self.model.save()
+        
+        return tracked_detections
 
     def draw_detections(self, image, detections):
         """
@@ -56,9 +81,9 @@ class Detector:
             self.model = YOLO("yolov8n.pt")
         self.model.fuse()
         
-    def process_video(self, video_path, output_path=None, show=False):
+    def process_video(self, video_path, output_path=None, show=False, tracker="bytetrack.yaml"):
         """
-        Process a video file and return detections for each frame
+        Process a video file with tracking and return detections for each frame
         """
         cap = cv2.VideoCapture(video_path)
         if not cap.isOpened():
@@ -72,24 +97,24 @@ class Detector:
             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
         
-        all_detections = []
+        all_tracked_detections = []
         
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
                 break
             
-            frame_detections = self.process_image(frame)
-            all_detections.append(frame_detections)
+            frame_detections = self.process_frame_with_tracking(frame, tracker=tracker)
+            all_tracked_detections.append(frame_detections)
             
             if output_path or show:
-                frame_with_detections = self.draw_detections(frame.copy(), frame_detections)
+                frame_with_detections = self.draw_tracked_detections(frame.copy(), frame_detections)
                 
                 if output_path:
                     out.write(frame_with_detections)
                 
                 if show:
-                    cv2.imshow('Object Detection', frame_with_detections)
+                    cv2.imshow('Object Tracking', frame_with_detections)
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
         
@@ -99,7 +124,17 @@ class Detector:
         if show:
             cv2.destroyAllWindows()
         
-        return all_detections
+        return all_tracked_detections
+
+    def draw_tracked_detections(self, image, tracked_detections):
+        """
+        Draw the tracked detections for visualizations
+        """
+        for (track_id, x1, y1, x2, y2, conf, detected_class, class_name) in tracked_detections:
+            cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
+            cv2.putText(image, f'{class_name} {track_id}: {conf:.2f}', (int(x1), int(y1)-10), 
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+        return image
 
     def save_detections(self, detections, output_path):
         """

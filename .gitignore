@@ -183,3 +183,5 @@ cython_debug/
 back/.env_info
 back/uploads/
 .env/
+
+data/photo_*

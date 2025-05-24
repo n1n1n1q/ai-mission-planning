@@ -1,13 +1,15 @@
 import os
 import logging
-
+import sys
 from pathlib import Path
 
-# from recon3D.data.video_splitter import video_to_frames
-# from recon3D.data.utils import visualize_pcds
-# from recon3D.reconstruction.model import load_images, inference, merge_clouds
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 
+from recon3D.data.video_splitter import video_to_frames
+from recon3D.data.utils import visualize_pcds
+from recon3D.reconstruction.model import load_data, inference, merge_clouds
 from recon3D.data.io import save_output_dict, load_output_dict
+from recon3D.pipeline.object_reconstruction_pipeline import process_video_with_objects
 
 import torch
 
@@ -18,7 +20,7 @@ def video_to_point_cloud(video_path):
         video_path, frames_output_path, frames_per_second=1
     )
 
-    images = load_images(frames_output_path)
+    images = load_data(frames_output_path)
     logging.info(f"Loaded {len(images)} images from {frames_output_path}")
     output_dict = inference(images)
     logging.info("Inference completed")
@@ -26,6 +28,28 @@ def video_to_point_cloud(video_path):
 
     return pcd, time_intervals, num_of_frames
 
+
+def video_to_point_cloud_with_objects(video_path, output_dir=None, target_classes=None):
+    """
+    Enhanced function for video to point cloud conversion with object detection.
+    Ensures unique objects are stored only once in CloudWithViews.interest_clouds.
+
+    Args:
+        video_path: Path to input video
+        output_dir: Directory to save intermediate results
+        target_classes: List of object classes to detect (None for all)
+
+    Returns:
+        CloudWithViews with unique objects in interest_clouds
+    """
+    return process_video_with_objects(
+        video_path=video_path,
+        output_dir=output_dir,
+        confidence_threshold=0.3,
+        reconstruction_confidence=65,
+        target_classes=target_classes,
+        frames_per_second=1,
+    )
 
 
 if __name__ == "__main__":

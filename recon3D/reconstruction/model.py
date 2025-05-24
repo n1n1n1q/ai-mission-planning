@@ -111,7 +111,7 @@ def merge_clouds(output_dict, confidence=65):
     pcd.points = o3d.utility.Vector3dVector(points)
     pcd.colors = o3d.utility.Vector3dVector(colors)
 
-    return CloudWithViews(pcd=pcd, poses=extract_poses(output_dict), views=output_dict["views"])
+    return CloudWithViews(pcd=pcd, poses=extract_poses(output_dict), views=output_dict["views"], interest_clouds=[], interest_points=o3d.geometry.PointCloud())
 
 
 def to_numpy(torch_tensor):

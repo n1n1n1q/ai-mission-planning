@@ -14,7 +14,7 @@ class Detector:
         Initialize the Yolo model
         """
         self._load_model(model_path)
-        self.tracker = "bytetrack.yaml"  # default track
+        self.tracker = "bytetrack.yaml"  
         self.model.conf = conf
         self.model.iou = iou
         self.model.classes = classes

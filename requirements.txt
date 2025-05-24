@@ -7,3 +7,5 @@ torchvision
 torchaudio 
 opencv-python
 open3d
+
+ultralytics

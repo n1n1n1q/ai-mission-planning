@@ -9,7 +9,7 @@ from fast3r.dust3r.utils.image import load_images
 from fast3r.dust3r.inference_multiview import inference as fast3r_inference
 from fast3r.models.fast3r import Fast3R
 from fast3r.models.multiview_dust3r_module import MultiViewDUSt3RLitModule
-
+from recon3D.data.cloud import CloudWithViews
 # --- Setup ---
 
 model = Fast3R.from_pretrained("model")  # If you have networking issues, try pre-download the HF checkpoint dir and change the path here to a local directory
@@ -98,8 +98,7 @@ def merge_clouds(output_dict, confidence=65):
     pcd.points = o3d.utility.Vector3dVector(points)
     pcd.colors = o3d.utility.Vector3dVector(colors)
 
-
-    return pcd
+    return CloudWithViews(pcd, extract_poses(output_dict))
 
 def to_numpy(torch_tensor):
     """

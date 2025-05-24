@@ -10,6 +10,10 @@ from open3d import geometry
 from scipy.spatial.distance import directed_hausdorff
 from tqdm import tqdm
 
+from recon3D.data.utils import visualize_pcds
+
+debug_mode = False 
+
 
 @dataclass
 class CloudWithViews:
@@ -127,6 +131,19 @@ def compare_objects_hausdorff(
         print(f"{obj_name1} -> min distance: {min_distance:.4f}")
 
         if min_distance <= threshold and best_match_idx != -1:
+
+            if debug_mode:
+                obj_pcd1.paint_uniform_color([1.0, 0.0, 0.0])
+                cloud2_by_base_name[base_name1][best_match_idx].paint_uniform_color(
+                    [0.0, 1.0, 0.0]
+                )
+                visualize_pcds(
+                    cloud1.pcd,
+                    obj_pcd1,
+                    cloud2_by_base_name[base_name1][best_match_idx],
+                    window_name=f"{obj_name1} vs {base_name1} match {min_distance}",
+                )
+
             cloud2_by_base_name[base_name1].pop(best_match_idx)
             print(
                 f"Matched {obj_name1} with object {best_match_idx}, removing from available matches"
@@ -136,7 +153,6 @@ def compare_objects_hausdorff(
                 "______________________________DEBUG______________________________",
                 cloud1.obj_frames.keys(),
             )
-            # If no close match found, add to missing list
             if obj_name1 in cloud1.obj_frames:
                 missing_obj_frames.append(
                     {"obj_name": obj_name1, "obj_frame": cloud1.obj_frames[obj_name1]}

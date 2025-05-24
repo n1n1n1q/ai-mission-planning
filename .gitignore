@@ -196,3 +196,4 @@ data/
 *__pycache__*
 
 yolov8n.pt
+yolo*

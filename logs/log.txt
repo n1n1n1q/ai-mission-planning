@@ -1,79 +1,358 @@
 Output dictionary loaded from data/saved_reconstruction_day1.pkl
 Output dictionary loaded from data/saved_reconstruction_day2.pkl
-YOLOv8n summary (fused): 72 layers, 3,151,904 parameters, 0 gradients, 8.7 GFLOPs
+YOLOv8x summary (fused): 112 layers, 68,200,608 parameters, 0 gradients, 257.8 GFLOPs
+Available classes: {0: 'person', 1: 'bicycle', 2: 'car', 3: 'motorcycle', 4: 'airplane', 5: 'bus', 6: 'train', 7: 'truck', 8: 'boat', 9: 'traffic light', 10: 'fire hydrant', 11: 'stop sign', 12: 'parking meter', 13: 'bench', 14: 'bird', 15: 'cat', 16: 'dog', 17: 'horse', 18: 'sheep', 19: 'cow', 20: 'elephant', 21: 'bear', 22: 'zebra', 23: 'giraffe', 24: 'backpack', 25: 'umbrella', 26: 'handbag', 27: 'tie', 28: 'suitcase', 29: 'frisbee', 30: 'skis', 31: 'snowboard', 32: 'sports ball', 33: 'kite', 34: 'baseball bat', 35: 'baseball glove', 36: 'skateboard', 37: 'surfboard', 38: 'tennis racket', 39: 'bottle', 40: 'wine glass', 41: 'cup', 42: 'fork', 43: 'knife', 44: 'spoon', 45: 'bowl', 46: 'banana', 47: 'apple', 48: 'sandwich', 49: 'orange', 50: 'broccoli', 51: 'carrot', 52: 'hot dog', 53: 'pizza', 54: 'donut', 55: 'cake', 56: 'chair', 57: 'couch', 58: 'potted plant', 59: 'bed', 60: 'dining table', 61: 'toilet', 62: 'tv', 63: 'laptop', 64: 'mouse', 65: 'remote', 66: 'keyboard', 67: 'cell phone', 68: 'microwave', 69: 'oven', 70: 'toaster', 71: 'sink', 72: 'refrigerator', 73: 'book', 74: 'clock', 75: 'vase', 76: 'scissors', 77: 'teddy bear', 78: 'hair drier', 79: 'toothbrush'}
 
-0: 288x512 1 bottle, 1 bowl, 6 chairs, 1 dining table, 25.9ms
-Speed: 0.0ms preprocess, 25.9ms inference, 1.0ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 bottle, 2 cups, 4 chairs, 1 dining table, 106.9ms
+Speed: 0.0ms preprocess, 106.9ms inference, 2.7ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 5 chairs, 1 dining table, 23.4ms
-Speed: 0.0ms preprocess, 23.4ms inference, 1.9ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 3 chairs, 1 dining table, 104.6ms
+Speed: 0.0ms preprocess, 104.6ms inference, 2.0ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 4 chairs, 1 dining table, 21.7ms
-Speed: 0.0ms preprocess, 21.7ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 2 chairs, 1 dining table, 108.6ms
+Speed: 0.0ms preprocess, 108.6ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 2 chairs, 1 dining table, 22.5ms
-Speed: 0.0ms preprocess, 22.5ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 bottle, 1 cup, 2 chairs, 1 dining table, 108.6ms
+Speed: 0.0ms preprocess, 108.6ms inference, 1.1ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 26.5ms
-Speed: 0.0ms preprocess, 26.5ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 bottle, 1 cup, 3 chairs, 1 dining table, 106.6ms
+Speed: 0.0ms preprocess, 106.6ms inference, 1.3ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 19.1ms
-Speed: 0.0ms preprocess, 19.1ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 cup, 2 chairs, 1 dining table, 106.1ms
+Speed: 0.0ms preprocess, 106.1ms inference, 1.0ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 18.6ms
-Speed: 0.0ms preprocess, 18.6ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 3 chairs, 1 dining table, 105.7ms
+Speed: 0.0ms preprocess, 105.7ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 dining table, 19.1ms
-Speed: 0.0ms preprocess, 19.1ms inference, 0.6ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 cup, 1 chair, 1 dining table, 108.4ms
+Speed: 0.0ms preprocess, 108.4ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 18.7ms
-Speed: 0.0ms preprocess, 18.7ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 cup, 1 chair, 1 dining table, 106.5ms
+Speed: 0.0ms preprocess, 106.5ms inference, 0.6ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 21.4ms
-Speed: 0.0ms preprocess, 21.4ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 cup, 1 chair, 1 dining table, 103.7ms
+Speed: 0.0ms preprocess, 103.7ms inference, 1.3ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 4 chairs, 1 dining table, 17.5ms
-Speed: 0.0ms preprocess, 17.5ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 chair, 1 dining table, 108.2ms
+Speed: 0.0ms preprocess, 108.2ms inference, 1.1ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 2 chairs, 1 dining table, 17.9ms
-Speed: 0.0ms preprocess, 17.9ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 2 chairs, 1 dining table, 105.4ms
+Speed: 0.0ms preprocess, 105.4ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 2 chairs, 21.3ms
-Speed: 0.0ms preprocess, 21.3ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 cup, 2 chairs, 1 dining table, 108.9ms
+Speed: 0.0ms preprocess, 108.9ms inference, 0.9ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 3 chairs, 1 dining table, 20.4ms
-Speed: 0.0ms preprocess, 20.4ms inference, 1.3ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 2 chairs, 1 dining table, 107.5ms
+Speed: 0.0ms preprocess, 107.5ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 20.2ms
-Speed: 0.0ms preprocess, 20.2ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 2 chairs, 1 dining table, 101.5ms
+Speed: 0.0ms preprocess, 101.5ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 18.6ms
-Speed: 0.0ms preprocess, 18.6ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 cup, 1 chair, 1 dining table, 105.5ms
+Speed: 0.0ms preprocess, 105.5ms inference, 0.9ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 17.1ms
-Speed: 0.0ms preprocess, 17.1ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 cup, 2 chairs, 2 dining tables, 105.3ms
+Speed: 0.0ms preprocess, 105.3ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 17.0ms
-Speed: 0.0ms preprocess, 17.0ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 2 chairs, 1 dining table, 109.4ms
+Speed: 0.0ms preprocess, 109.4ms inference, 0.9ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 18.5ms
-Speed: 0.0ms preprocess, 18.5ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 2 cups, 1 chair, 2 dining tables, 103.5ms
+Speed: 0.0ms preprocess, 103.5ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 19.6ms
-Speed: 0.0ms preprocess, 19.6ms inference, 0.9ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 bottle, 2 chairs, 2 dining tables, 102.7ms
+Speed: 0.0ms preprocess, 102.7ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 1 chair, 1 dining table, 21.1ms
-Speed: 0.0ms preprocess, 21.1ms inference, 0.6ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 1 chair, 1 dining table, 105.2ms
+Speed: 0.0ms preprocess, 105.2ms inference, 0.6ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 2 chairs, 1 dining table, 22.3ms
-Speed: 0.0ms preprocess, 22.3ms inference, 0.6ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 2 chairs, 1 dining table, 102.8ms
+Speed: 0.0ms preprocess, 102.8ms inference, 1.1ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 2 chairs, 1 dining table, 20.2ms
-Speed: 0.0ms preprocess, 20.2ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+0: 288x512 3 chairs, 1 dining table, 108.4ms
+Speed: 0.0ms preprocess, 108.4ms inference, 1.3ms postprocess per image at shape (1, 3, 288, 512)
 
-0: 288x512 3 chairs, 1 dining table, 20.2ms
-Speed: 0.0ms preprocess, 20.2ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
-defaultdict(<class 'list'>, {'chair1': [0, 1], 'chair2': [0, 1, 2, 3, 10, 11], 'chair3': [0, 1, 2, 3, 4, 5, 6], 'chair4': [0, 10, 11], 'bottle5': [0], 'chair6': [0, 1, 2], 'dining table7': [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11], 'bowl8': [0], 'chair9': [0, 1, 2], 'chair29': [8, 9, 10], 'chair37': [10]})
-{'chair1': PointCloud with 62178 points., 'chair2': PointCloud with 152311 points., 'chair3': PointCloud with 124285 points., 'chair4': PointCloud with 70700 points., 'bottle5': PointCloud with 532 points., 'chair6': PointCloud with 128637 points., 'dining table7': PointCloud with 955807 points., 'bowl8': PointCloud with 722 points., 'chair9': PointCloud with 17956 points., 'chair29': PointCloud with 81933 points., 'chair37': PointCloud with 2244 points.}
-dict_keys(['chair1', 'chair2', 'chair3', 'chair4', 'bottle5', 'chair6', 'dining table7', 'bowl8', 'chair9', 'chair29', 'chair37'])
-dict_keys(['chair2', 'chair1', 'chair58', 'dining table7', 'chair77', 'chair37', 'chair99'])
+0: 288x512 1 chair, 1 dining table, 103.6ms
+Speed: 0.0ms preprocess, 103.6ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+Comparing chair1 with object 0 -> distance: 0.0533
+Comparing chair1 with object 1 -> distance: 0.2733
+Comparing chair1 with object 2 -> distance: 0.1218
+Comparing chair1 with object 3 -> distance: 0.2198
+Comparing chair1 with object 4 -> distance: 0.2132
+Comparing chair1 with object 5 -> distance: 0.3632
+Comparing chair1 with object 6 -> distance: 0.1957
+chair1 -> min distance: 0.0533
+Matched chair1 with object 0, removing from available matches
+Comparing chair2 with object 0 -> distance: 0.3645
+Comparing chair2 with object 1 -> distance: 0.1102
+Comparing chair2 with object 2 -> distance: 0.2942
+Comparing chair2 with object 3 -> distance: 0.2066
+Comparing chair2 with object 4 -> distance: 0.3866
+Comparing chair2 with object 5 -> distance: 0.1890
+chair2 -> min distance: 0.1102
+Matched chair2 with object 1, removing from available matches
+Comparing bottle4 with object 0 -> distance: 0.4647
+bottle4 -> min distance: 0.4647
+______________________________DEBUG______________________________ dict_keys(['chair1', 'chair2', 'bottle4', 'chair5', 'chair6', 'bottle20', 'chair32', 'chair39', 'chair62'])
+Comparing chair5 with object 0 -> distance: 0.1830
+Comparing chair5 with object 1 -> distance: 0.2651
+Comparing chair5 with object 2 -> distance: 0.3143
+Comparing chair5 with object 3 -> distance: 0.5569
+Comparing chair5 with object 4 -> distance: 0.4251
+chair5 -> min distance: 0.1830
+Matched chair5 with object 0, removing from available matches
+Comparing chair6 with object 0 -> distance: 0.4245
+Comparing chair6 with object 1 -> distance: 0.3854
+Comparing chair6 with object 2 -> distance: 0.4899
+Comparing chair6 with object 3 -> distance: 0.3667
+chair6 -> min distance: 0.3667
+______________________________DEBUG______________________________ dict_keys(['chair1', 'chair2', 'bottle4', 'chair5', 'chair6', 'bottle20', 'chair32', 'chair39', 'chair62'])
+Comparing bottle20 with object 0 -> distance: 0.2593
+bottle20 -> min distance: 0.2593
+Matched bottle20 with object 0, removing from available matches
+Comparing chair32 with object 0 -> distance: 0.2881
+Comparing chair32 with object 1 -> distance: 0.1552
+Comparing chair32 with object 2 -> distance: 0.1517
+Comparing chair32 with object 3 -> distance: 0.1631
+chair32 -> min distance: 0.1517
+Matched chair32 with object 2, removing from available matches
+Comparing chair39 with object 0 -> distance: 0.3771
+Comparing chair39 with object 1 -> distance: 0.3356
+Comparing chair39 with object 2 -> distance: 0.3167
+chair39 -> min distance: 0.3167
+______________________________DEBUG______________________________ dict_keys(['chair1', 'chair2', 'bottle4', 'chair5', 'chair6', 'bottle20', 'chair32', 'chair39', 'chair62'])
+Comparing chair62 with object 0 -> distance: 0.2514
+Comparing chair62 with object 1 -> distance: 0.1055
+Comparing chair62 with object 2 -> distance: 0.0907
+chair62 -> min distance: 0.0907
+Matched chair62 with object 2, removing from available matches
+Found 3 objects in day1 that are missing or significantly different in day2
+Comparing chair39 with object 0 -> distance: 0.0533
+Comparing chair39 with object 1 -> distance: 0.0944
+Comparing chair39 with object 2 -> distance: 0.4071
+Comparing chair39 with object 3 -> distance: 0.3730
+Comparing chair39 with object 4 -> distance: 0.2829
+Comparing chair39 with object 5 -> distance: 0.2037
+Comparing chair39 with object 6 -> distance: 0.1992
+chair39 -> min distance: 0.0533
+Matched chair39 with object 0, removing from available matches
+Comparing chair5 with object 0 -> distance: 0.3645
+Comparing chair5 with object 1 -> distance: 0.1830
+Comparing chair5 with object 2 -> distance: 0.3782
+Comparing chair5 with object 3 -> distance: 0.3506
+Comparing chair5 with object 4 -> distance: 0.4426
+Comparing chair5 with object 5 -> distance: 0.3202
+chair5 -> min distance: 0.1830
+Matched chair5 with object 1, removing from available matches
+Comparing chair71 with object 0 -> distance: 0.1102
+Comparing chair71 with object 1 -> distance: 0.3485
+Comparing chair71 with object 2 -> distance: 0.1981
+Comparing chair71 with object 3 -> distance: 0.2416
+Comparing chair71 with object 4 -> distance: 0.1484
+chair71 -> min distance: 0.1102
+Matched chair71 with object 0, removing from available matches
+Comparing chair94 with object 0 -> distance: 0.4245
+Comparing chair94 with object 1 -> distance: 0.2881
+Comparing chair94 with object 2 -> distance: 0.3771
+Comparing chair94 with object 3 -> distance: 0.2514
+chair94 -> min distance: 0.2514
+Matched chair94 with object 3, removing from available matches
+Comparing bottle100 with object 0 -> distance: 0.4647
+Comparing bottle100 with object 1 -> distance: 0.2593
+bottle100 -> min distance: 0.2593
+Matched bottle100 with object 1, removing from available matches
+Comparing chair62 with object 0 -> distance: 0.3854
+Comparing chair62 with object 1 -> distance: 0.1552
+Comparing chair62 with object 2 -> distance: 0.3356
+chair62 -> min distance: 0.1552
+Matched chair62 with object 1, removing from available matches
+Comparing chair124 with object 0 -> distance: 0.4899
+Comparing chair124 with object 1 -> distance: 0.4398
+chair124 -> min distance: 0.4398
+______________________________DEBUG______________________________ dict_keys(['chair39', 'chair5', 'chair71', 'chair94', 'bottle100', 'chair62', 'chair124', 'chair126'])
+Comparing chair126 with object 0 -> distance: 0.3667
+Comparing chair126 with object 1 -> distance: 0.3167
+chair126 -> min distance: 0.3167
+______________________________DEBUG______________________________ dict_keys(['chair39', 'chair5', 'chair71', 'chair94', 'bottle100', 'chair62', 'chair124', 'chair126'])
+Found 2 objects in day2 that are missing or significantly different in day1
+12 12 DEBUG: Day 1 video info
+Output dictionary loaded from data/saved_reconstruction_day1.pkl
+Output dictionary loaded from data/saved_reconstruction_day2.pkl
+YOLOv8x summary (fused): 112 layers, 68,200,608 parameters, 0 gradients, 257.8 GFLOPs
+Available classes: {0: 'person', 1: 'bicycle', 2: 'car', 3: 'motorcycle', 4: 'airplane', 5: 'bus', 6: 'train', 7: 'truck', 8: 'boat', 9: 'traffic light', 10: 'fire hydrant', 11: 'stop sign', 12: 'parking meter', 13: 'bench', 14: 'bird', 15: 'cat', 16: 'dog', 17: 'horse', 18: 'sheep', 19: 'cow', 20: 'elephant', 21: 'bear', 22: 'zebra', 23: 'giraffe', 24: 'backpack', 25: 'umbrella', 26: 'handbag', 27: 'tie', 28: 'suitcase', 29: 'frisbee', 30: 'skis', 31: 'snowboard', 32: 'sports ball', 33: 'kite', 34: 'baseball bat', 35: 'baseball glove', 36: 'skateboard', 37: 'surfboard', 38: 'tennis racket', 39: 'bottle', 40: 'wine glass', 41: 'cup', 42: 'fork', 43: 'knife', 44: 'spoon', 45: 'bowl', 46: 'banana', 47: 'apple', 48: 'sandwich', 49: 'orange', 50: 'broccoli', 51: 'carrot', 52: 'hot dog', 53: 'pizza', 54: 'donut', 55: 'cake', 56: 'chair', 57: 'couch', 58: 'potted plant', 59: 'bed', 60: 'dining table', 61: 'toilet', 62: 'tv', 63: 'laptop', 64: 'mouse', 65: 'remote', 66: 'keyboard', 67: 'cell phone', 68: 'microwave', 69: 'oven', 70: 'toaster', 71: 'sink', 72: 'refrigerator', 73: 'book', 74: 'clock', 75: 'vase', 76: 'scissors', 77: 'teddy bear', 78: 'hair drier', 79: 'toothbrush'}
+
+0: 288x512 1 bottle, 2 cups, 4 chairs, 1 dining table, 85.2ms
+Speed: 0.0ms preprocess, 85.2ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 3 chairs, 1 dining table, 84.7ms
+Speed: 0.0ms preprocess, 84.7ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 86.1ms
+Speed: 0.0ms preprocess, 86.1ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 bottle, 1 cup, 2 chairs, 1 dining table, 86.0ms
+Speed: 0.0ms preprocess, 86.0ms inference, 1.0ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 bottle, 1 cup, 3 chairs, 1 dining table, 83.1ms
+Speed: 0.0ms preprocess, 83.1ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 cup, 2 chairs, 1 dining table, 81.8ms
+Speed: 0.0ms preprocess, 81.8ms inference, 2.0ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 3 chairs, 1 dining table, 91.2ms
+Speed: 0.0ms preprocess, 91.2ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 cup, 1 chair, 1 dining table, 86.9ms
+Speed: 0.0ms preprocess, 86.9ms inference, 1.0ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 cup, 1 chair, 1 dining table, 88.4ms
+Speed: 0.0ms preprocess, 88.4ms inference, 0.9ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 cup, 1 chair, 1 dining table, 98.9ms
+Speed: 0.0ms preprocess, 98.9ms inference, 1.1ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 92.1ms
+Speed: 0.0ms preprocess, 92.1ms inference, 1.0ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 89.8ms
+Speed: 0.0ms preprocess, 89.8ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 cup, 2 chairs, 1 dining table, 87.1ms
+Speed: 0.0ms preprocess, 87.1ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 81.5ms
+Speed: 0.0ms preprocess, 81.5ms inference, 0.9ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 80.8ms
+Speed: 0.0ms preprocess, 80.8ms inference, 2.0ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 cup, 1 chair, 1 dining table, 97.9ms
+Speed: 0.0ms preprocess, 97.9ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 cup, 2 chairs, 2 dining tables, 89.8ms
+Speed: 0.0ms preprocess, 89.8ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 85.7ms
+Speed: 0.0ms preprocess, 85.7ms inference, 1.1ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 cups, 1 chair, 2 dining tables, 82.1ms
+Speed: 0.0ms preprocess, 82.1ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 bottle, 2 chairs, 2 dining tables, 85.0ms
+Speed: 0.0ms preprocess, 85.0ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 81.8ms
+Speed: 0.0ms preprocess, 81.8ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 2 chairs, 1 dining table, 80.7ms
+Speed: 0.0ms preprocess, 80.7ms inference, 0.7ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 3 chairs, 1 dining table, 82.1ms
+Speed: 0.0ms preprocess, 82.1ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+
+0: 288x512 1 chair, 1 dining table, 111.3ms
+Speed: 0.0ms preprocess, 111.3ms inference, 0.8ms postprocess per image at shape (1, 3, 288, 512)
+Comparing chair1 with object 0 -> distance: 0.0683
+Comparing chair1 with object 1 -> distance: 0.2527
+Comparing chair1 with object 2 -> distance: 0.1402
+Comparing chair1 with object 3 -> distance: 0.2222
+Comparing chair1 with object 4 -> distance: 0.2137
+Comparing chair1 with object 5 -> distance: 0.3662
+Comparing chair1 with object 6 -> distance: 0.1966
+chair1 -> min distance: 0.0683
+Matched chair1 with object 0, removing from available matches
+Comparing chair2 with object 0 -> distance: 0.3474
+Comparing chair2 with object 1 -> distance: 0.1149
+Comparing chair2 with object 2 -> distance: 0.2769
+Comparing chair2 with object 3 -> distance: 0.2093
+Comparing chair2 with object 4 -> distance: 0.3932
+Comparing chair2 with object 5 -> distance: 0.1925
+chair2 -> min distance: 0.1149
+Matched chair2 with object 1, removing from available matches
+Comparing bottle4 with object 0 -> distance: 0.4736
+bottle4 -> min distance: 0.4736
+______________________________DEBUG______________________________ dict_keys(['chair1', 'chair2', 'bottle4', 'chair5', 'chair6', 'bottle20', 'chair32', 'chair39', 'chair62'])
+Comparing chair5 with object 0 -> distance: 0.1900
+Comparing chair5 with object 1 -> distance: 0.2687
+Comparing chair5 with object 2 -> distance: 0.3394
+Comparing chair5 with object 3 -> distance: 0.5748
+Comparing chair5 with object 4 -> distance: 0.4355
+chair5 -> min distance: 0.1900
+Matched chair5 with object 0, removing from available matches
+Comparing chair6 with object 0 -> distance: 0.4178
+Comparing chair6 with object 1 -> distance: 0.3728
+Comparing chair6 with object 2 -> distance: 0.4814
+Comparing chair6 with object 3 -> distance: 0.3541
+chair6 -> min distance: 0.3541
+______________________________DEBUG______________________________ dict_keys(['chair1', 'chair2', 'bottle4', 'chair5', 'chair6', 'bottle20', 'chair32', 'chair39', 'chair62'])
+Comparing bottle20 with object 0 -> distance: 0.2784
+bottle20 -> min distance: 0.2784
+Matched bottle20 with object 0, removing from available matches
+Comparing chair32 with object 0 -> distance: 0.2547
+Comparing chair32 with object 1 -> distance: 0.1419
+Comparing chair32 with object 2 -> distance: 0.1861
+Comparing chair32 with object 3 -> distance: 0.1454
+chair32 -> min distance: 0.1419
+Matched chair32 with object 1, removing from available matches
+Comparing chair39 with object 0 -> distance: 0.3672
+Comparing chair39 with object 1 -> distance: 0.4323
+Comparing chair39 with object 2 -> distance: 0.3048
+chair39 -> min distance: 0.3048
+______________________________DEBUG______________________________ dict_keys(['chair1', 'chair2', 'bottle4', 'chair5', 'chair6', 'bottle20', 'chair32', 'chair39', 'chair62'])
+Comparing chair62 with object 0 -> distance: 0.2282
+Comparing chair62 with object 1 -> distance: 0.2780
+Comparing chair62 with object 2 -> distance: 0.1255
+chair62 -> min distance: 0.1255
+Matched chair62 with object 2, removing from available matches
+Found 3 objects in day1 that are missing or significantly different in day2
+Comparing chair39 with object 0 -> distance: 0.0683
+Comparing chair39 with object 1 -> distance: 0.0900
+Comparing chair39 with object 2 -> distance: 0.4311
+Comparing chair39 with object 3 -> distance: 0.3789
+Comparing chair39 with object 4 -> distance: 0.2665
+Comparing chair39 with object 5 -> distance: 0.1951
+Comparing chair39 with object 6 -> distance: 0.1993
+chair39 -> min distance: 0.0683
+Matched chair39 with object 0, removing from available matches
+Comparing chair5 with object 0 -> distance: 0.3474
+Comparing chair5 with object 1 -> distance: 0.1900
+Comparing chair5 with object 2 -> distance: 0.3883
+Comparing chair5 with object 3 -> distance: 0.3166
+Comparing chair5 with object 4 -> distance: 0.4353
+Comparing chair5 with object 5 -> distance: 0.2972
+chair5 -> min distance: 0.1900
+Matched chair5 with object 1, removing from available matches
+Comparing chair71 with object 0 -> distance: 0.1149
+Comparing chair71 with object 1 -> distance: 0.3496
+Comparing chair71 with object 2 -> distance: 0.1849
+Comparing chair71 with object 3 -> distance: 0.2299
+Comparing chair71 with object 4 -> distance: 0.1688
+chair71 -> min distance: 0.1149
+Matched chair71 with object 0, removing from available matches
+Comparing chair94 with object 0 -> distance: 0.4178
+Comparing chair94 with object 1 -> distance: 0.2547
+Comparing chair94 with object 2 -> distance: 0.3672
+Comparing chair94 with object 3 -> distance: 0.2282
+chair94 -> min distance: 0.2282
+Matched chair94 with object 3, removing from available matches
+Comparing bottle100 with object 0 -> distance: 0.4736
+Comparing bottle100 with object 1 -> distance: 0.2784
+bottle100 -> min distance: 0.2784
+Matched bottle100 with object 1, removing from available matches
+Comparing chair62 with object 0 -> distance: 0.3728
+Comparing chair62 with object 1 -> distance: 0.1419
+Comparing chair62 with object 2 -> distance: 0.3237
+chair62 -> min distance: 0.1419
+Matched chair62 with object 1, removing from available matches
+Comparing chair124 with object 0 -> distance: 0.4814
+Comparing chair124 with object 1 -> distance: 0.4323
+chair124 -> min distance: 0.4323
+______________________________DEBUG______________________________ dict_keys(['chair39', 'chair5', 'chair71', 'chair94', 'bottle100', 'chair62', 'chair124', 'chair126'])
+Comparing chair126 with object 0 -> distance: 0.3541
+Comparing chair126 with object 1 -> distance: 0.3048
+chair126 -> min distance: 0.3048
+______________________________DEBUG______________________________ dict_keys(['chair39', 'chair5', 'chair71', 'chair94', 'bottle100', 'chair62', 'chair124', 'chair126'])
+Found 2 objects in day2 that are missing or significantly different in day1
+12 12 DEBUG: Day 1 video info
+[('bottle4', 0, 1), ('chair6', 0, 7), ('chair39', 7, 12)]
+[('chair124', 8, 11), ('chair126', 9, 11)]

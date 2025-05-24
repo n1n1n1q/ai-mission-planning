@@ -1,4 +1,1 @@
-# ai-mission-planning
-- SLAM
-- Smart pathfinder
-- gazebo
+# ADHD -- Adaptive Dynamic Hazard Detection

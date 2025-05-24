@@ -73,10 +73,9 @@ def extract_poses(output_dict):
     camera_poses = poses_c2w_batch[0]
     return camera_poses
 
-
-def merge_clouds(output_dict, confidence=65):
+def estimate_global_poses(output_dict, confidence=65):
     """
-    Merge point clouds into a single point cloud.
+    Estimate global point cloud positions.
     """
     lit_module.align_local_pts3d_to_global(
         preds=output_dict["preds"],
@@ -84,6 +83,11 @@ def merge_clouds(output_dict, confidence=65):
         min_conf_thr_percentile=confidence,
     )
 
+def merge_clouds(output_dict, confidence=65):
+    """
+    Merge point clouds into a single point cloud.
+    """
+    estimate_global_poses(output_dict, confidence=confidence)
     top_points, top_colors = [], []
     keep_frac = 1.0 - confidence / 100.0
     for pred, view in zip(output_dict["preds"], output_dict["views"]):
@@ -107,7 +111,7 @@ def merge_clouds(output_dict, confidence=65):
     pcd.points = o3d.utility.Vector3dVector(points)
     pcd.colors = o3d.utility.Vector3dVector(colors)
 
-    return CloudWithViews(pcd, extract_poses(output_dict))
+    return CloudWithViews(pcd=pcd, poses=extract_poses(output_dict), views=output_dict["views"])
 
 
 def to_numpy(torch_tensor):

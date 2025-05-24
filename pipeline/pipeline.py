@@ -10,7 +10,9 @@ from recon3D.reconstruction.model import load_images, inference, merge_clouds
 
 def video_to_point_cloud(video_path):
     frames_output_path = f"data/photos/frames_of_{Path(video_path).stem}"
-    video_to_frames(video_path, frames_output_path, frames_per_second=1)
+    time_intervals, num_of_frames = video_to_frames(
+        video_path, frames_output_path, frames_per_second=1
+    )
 
     images = load_images(frames_output_path)
     logging.info(f"Loaded {len(images)} images from {frames_output_path}")

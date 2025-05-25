@@ -7,7 +7,7 @@ export default function Header() {
         <header className="w-full border-b shadow-sm bg-white dark:bg-zinc-900">
             <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
                 <Link href="/" className="text-xl font-bold text-primary">
-                    ADCD -e
+                    🧠ADHD - Adaptive Dynamic Hazard Detection 🎯
                 </Link>
                 <nav className="space-x-2">
                     <Link href="/upload">

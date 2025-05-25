@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {backendUrl} from "@/const";
+import { redirect } from "next/navigation";
 
 export default function UploadPage() {
     const [videoUrl, setVideoUrl] = useState<string | null>(null)
@@ -39,7 +40,7 @@ export default function UploadPage() {
         })
 
         const data = await res.json()
-
+        redirect('/dashboard')
     }
 
     return (
